@@ -1,0 +1,17 @@
+
+{
+  "name": "soon-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Soon Studio visual novel",
+  "scripts": {
+    "build": "mkdir -p www && cp index.html style.css www/ && cp -r js asset www/"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/core": "^7.4.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.3"
+  }
+}
