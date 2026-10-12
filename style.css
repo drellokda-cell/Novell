@@ -658,3 +658,37 @@ button:disabled {
     padding: 7px;
   }
 }
+
+
+/* Убираем синюю подсветку при касании */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+.screen,
+.scene-background,
+.scene-character,
+.menu-background,
+.menu-character,
+.dialogue-box,
+.dialogue-text {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+button,
+.next-area {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Не даём картинкам выделяться и перетаскиваться */
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
