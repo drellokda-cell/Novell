@@ -5,46 +5,52 @@
 
 :root {
   color-scheme: dark;
+  --panel: rgba(12, 12, 15, 0.94);
+  --panel-light: rgba(255, 255, 255, 0.08);
+  --text: #f0f0f0;
+  --muted: #a6a6a6;
+  --accent: #b7a4ff;
+  --danger: #b72b35;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  background: #080808;
+  color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
-  background: #101014;
-  color: #f0eef4;
-  --panel: rgba(17, 17, 23, 0.94);
-  --button: #35353d;
-  --button-hover: #50505d;
-  --accent: #b83c4c;
 }
 
 body {
-  margin: 0;
   min-height: 100dvh;
   overflow: hidden;
-  background: #101014;
 }
 
 button {
-  border: 1px solid #51515c;
-  border-radius: 5px;
-  padding: 12px 16px;
-  color: #f4f1f5;
-  background: var(--button);
+  color: var(--text);
+  background: rgba(20, 20, 23, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  border-radius: 3px;
+  padding: 13px 16px;
   font: inherit;
   cursor: pointer;
-  transition: background 0.18s, border-color 0.18s;
+  transition: background 0.18s, border-color 0.18s, transform 0.18s;
 }
 
 button:hover:not(:disabled) {
-  background: var(--button-hover);
-  border-color: #858591;
+  background: rgba(100, 85, 130, 0.55);
+  border-color: var(--accent);
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 button:disabled {
-  opacity: 0.38;
+  opacity: 0.35;
   cursor: not-allowed;
-}
-
-button:focus-visible {
-  outline: 2px solid #e18c9a;
-  outline-offset: 2px;
 }
 
 .hidden {
@@ -56,16 +62,19 @@ button:focus-visible {
   inset: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
+
+/* Заставка */
 
 .splash {
   z-index: 100;
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: #050506;
+  align-items: center;
+  background: #050505;
   opacity: 1;
-  transition: opacity 1.5s ease;
+  transition: opacity 1.2s ease;
 }
 
 .splash.fade-out {
@@ -73,350 +82,579 @@ button:focus-visible {
   pointer-events: none;
 }
 
-.studio-title {
-  color: #e6e6e6;
-  font: 400 clamp(24px, 5vw, 42px) Arial, sans-serif;
+.splash-title {
+  font-size: clamp(22px, 4vw, 38px);
+  font-weight: 400;
   letter-spacing: 2px;
-  animation: title-appear 1.2s ease both;
+  color: #e8e8e8;
+  animation: title-appear 1.5s ease both;
 }
 
 @keyframes title-appear {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
+/* Главное меню */
+
 .main-menu {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 4vh 5vw;
-  overflow: hidden;
+  background: #080808;
+}
+
+.menu-background,
+.menu-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.menu-background {
+  object-fit: cover;
+  object-position: center;
+}
+
+.menu-shade {
   background:
-    linear-gradient(90deg, transparent 30%, rgba(0,0,0,.25) 60%, #101014 100%),
-    url("assets/menu.png") center / cover no-repeat,
-    #24242c;
-  opacity: 1;
-  transition: opacity 1.3s ease;
+    linear-gradient(90deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.22) 60%, rgba(0, 0, 0, 0.6)),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.6), transparent 45%);
 }
 
 .menu-character {
   position: absolute;
-  left: 5%;
   bottom: 0;
-  height: 90%;
-  max-width: 55%;
+  left: 3%;
+  width: min(54vw, 620px);
+  height: 91%;
   object-fit: contain;
-  object-position: bottom;
+  object-position: bottom left;
   pointer-events: none;
+  filter: drop-shadow(0 0 28px rgba(0, 0, 0, 0.5));
 }
 
-.main-buttons {
-  z-index: 1;
+.menu-content {
+  position: absolute;
+  top: 50%;
+  right: clamp(22px, 8vw, 130px);
+  width: min(330px, 42vw);
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+.game-logo {
+  font-size: clamp(30px, 4vw, 54px);
+  font-weight: 300;
+  letter-spacing: 8px;
+}
+
+.game-subtitle {
+  margin: 5px 0 32px;
+  font-size: 12px;
+  letter-spacing: 7px;
+  color: #bdbdbd;
+}
+
+.menu-buttons {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  width: min(300px, 40vw);
+  gap: 9px;
 }
 
-.main-buttons h1 {
-  margin: 0 0 18px;
-  text-align: center;
-  font-weight: 400;
-  letter-spacing: 4px;
+.menu-buttons button {
+  min-height: 46px;
+  width: 100%;
+  background: rgba(8, 8, 10, 0.78);
+  letter-spacing: 0.5px;
 }
 
-.main-buttons button {
-  min-height: 45px;
-  background: rgba(25, 25, 32, 0.88);
+.menu-buttons .exit-button {
+  margin-top: 10px;
+  color: #d0a6a6;
 }
+
+.version-label {
+  position: absolute;
+  bottom: 18px;
+  right: 22px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+/* Игровая сцена */
 
 .game-screen {
-  background: #111;
+  background: #050505;
 }
 
-.scene {
+.scene-background {
   position: absolute;
   inset: 0;
-  background: url("assets/Test.png") center / cover no-repeat, #25252b;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.dialog-character {
+.scene-darkening {
   position: absolute;
-  left: 3%;
-  bottom: 18%;
-  height: 76%;
-  max-width: 55%;
-  object-fit: contain;
-  object-position: bottom;
+  inset: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.12) 70%
+  );
   pointer-events: none;
 }
 
-.dialogue-box {
+.scene-character {
   position: absolute;
-  z-index: 3;
-  left: 3%;
-  right: 3%;
-  bottom: max(12px, env(safe-area-inset-bottom));
-  min-height: 150px;
-  padding: 17px 20px 10px;
-  border: 1px solid rgba(220, 220, 235, .35);
-  border-radius: 8px;
-  background: var(--panel);
-  backdrop-filter: blur(8px);
-}
-
-.speaker {
-  margin-bottom: 10px;
-  color: #e5a4b1;
-  font-weight: bold;
-}
-
-.dialog-text {
-  min-height: 42px;
-  line-height: 1.6;
-  white-space: pre-wrap;
-}
-
-.choices {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.choices button {
-  flex: 1 1 180px;
-}
-
-.dialogue-toolbar {
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 12px;
-}
-
-.dialogue-toolbar button {
-  padding: 7px 12px;
-  font-size: 13px;
-}
-
-.dialogue-toolbar button.active {
-  background: #b83c4c;
-  border-color: #ed7888;
+  left: 2%;
+  bottom: 15%;
+  height: 78%;
+  width: min(58%, 720px);
+  object-fit: contain;
+  object-position: bottom left;
+  pointer-events: none;
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.45));
 }
 
 .next-area {
   position: absolute;
   inset: 0;
   z-index: 1;
-  width: 100%;
-  height: 100%;
   padding: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
 }
 
+.next-area:hover,
+.next-area:active {
+  background: transparent;
+  border: 0;
+  transform: none;
+}
+
+/* Диалоги */
+
 .dialogue-box {
+  position: absolute;
+  z-index: 3;
+  left: 5%;
+  right: 5%;
+  bottom: 72px;
+  min-height: 145px;
+  padding: 21px 25px;
+  background: rgba(7, 7, 10, 0.91);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
   pointer-events: none;
 }
 
-.dialogue-box button,
-.dialogue-box .choices,
-.dialogue-box .choices button {
+.speaker-name {
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.dialogue-text {
+  font-size: clamp(15px, 1.8vw, 19px);
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 18px;
   pointer-events: auto;
 }
 
-.dialogue-box .choices {
-  position: relative;
-  z-index: 5;
+.choices button {
+  width: 100%;
+  text-align: left;
+  background: rgba(40, 35, 50, 0.94);
 }
 
-.pause-screen {
+.dialogue-toolbar {
+  position: absolute;
+  z-index: 5;
+  left: 5%;
+  right: 5%;
+  bottom: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.dialogue-toolbar button {
+  min-width: 80px;
+  padding: 10px 13px;
+  pointer-events: auto;
+  background: rgba(12, 12, 15, 0.94);
+}
+
+.dialogue-toolbar button.active {
+  background: var(--danger);
+  border-color: #f06b72;
+}
+
+/* Игровое меню */
+
+.game-menu {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 5vw;
-  background: rgba(5, 5, 9, .92);
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.76);
 }
 
-.pause-panel {
+.game-menu-panel {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: min(330px, 100%);
+  width: min(320px, 100%);
+  padding: 25px;
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 15px 50px #000;
 }
 
-.pause-panel h2 {
-  font-weight: 400;
+.panel-title {
+  margin-bottom: 15px;
+  text-align: center;
+  letter-spacing: 5px;
 }
+
+.game-menu-panel button {
+  width: 100%;
+}
+
+/* Модальные окна */
 
 .modal-layer {
   position: fixed;
-  z-index: 200;
+  z-index: 50;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14px;
-  background: rgba(0, 0, 0, .78);
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.8);
 }
 
-.modal-window {
+.modal {
   position: relative;
-  width: min(900px, 100%);
-  max-height: 90dvh;
-  overflow-y: auto;
-  padding: 25px;
-  border: 1px solid #474750;
-  border-radius: 10px;
-  background: #19191f;
+  width: min(720px, 100%);
+  max-height: 88dvh;
+  overflow: auto;
+  padding: 30px;
+  background: #101013;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 70px #000;
 }
 
 .modal-close {
   position: sticky;
-  top: 0;
+  z-index: 2;
   float: right;
-  z-index: 3;
-  padding: 4px 12px;
-  font-size: 24px;
+  top: 0;
+  margin: -16px -15px 8px 8px;
+  padding: 3px 10px;
+  border: 0;
+  background: transparent;
+  font-size: 28px;
 }
 
-.modal-window h2 {
+.modal h2 {
+  margin: 0 0 22px;
+  font-size: 22px;
   font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.modal p {
+  color: #d0d0d0;
+  line-height: 1.6;
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.modal-actions button {
+  flex: 1;
+}
+
+.save-pages {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.save-pages button {
+  min-width: 38px;
+  padding: 8px;
+}
+
+.save-pages button.selected {
+  background: #66528d;
+  border-color: var(--accent);
 }
 
 .save-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  clear: both;
+  gap: 10px;
 }
 
 .save-slot {
-  min-width: 0;
-  padding: 8px;
-  border: 1px solid #45454e;
-  border-radius: 6px;
-  background: #222229;
-}
-
-.save-slot img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  background: #303039;
-}
-
-.save-slot p {
-  overflow-wrap: anywhere;
-  font-size: 12px;
-}
-
-.slot-actions {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 7px;
+  min-height: 110px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.slot-actions button {
-  padding: 7px 4px;
+.save-slot strong {
+  font-size: 13px;
+}
+
+.save-slot span {
+  color: var(--muted);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.save-slot button {
+  margin-top: auto;
+  padding: 8px;
   font-size: 12px;
 }
 
-.page-controls {
+.settings-list {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  margin-top: 18px;
+  flex-direction: column;
+  gap: 18px;
 }
 
-.settings-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.setting-row {
+  display: flex;
   align-items: center;
-  gap: 14px;
-  margin: 18px 0;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.settings-row input,
-.settings-row select {
-  width: 100%;
+.setting-row label {
+  color: #ddd;
+}
+
+.setting-row select {
+  max-width: 55%;
+  padding: 9px;
+  color: white;
+  background: #242428;
+  border: 1px solid #555;
+}
+
+.setting-row input[type="checkbox"] {
+  width: 19px;
+  height: 19px;
+  accent-color: var(--accent);
+}
+
+.log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  max-height: 60dvh;
+  overflow-y: auto;
 }
 
 .log-entry {
-  padding: 10px 0;
-  border-bottom: 1px solid #393940;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.045);
+  border-left: 2px solid #8170a7;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .log-entry strong {
   display: block;
-  color: #e5a4b1;
+  margin-bottom: 5px;
+  color: var(--accent);
 }
 
+.empty-message {
+  padding: 20px 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+.ending-title {
+  color: var(--accent);
+  font-size: 24px;
+}
+
+/* Телефоны */
+
 @media (max-width: 650px) {
-  .main-menu {
-    align-items: flex-end;
-    justify-content: center;
-    padding: 18px;
-    background-position: center;
+  .menu-background {
+    object-position: 40% center;
+  }
+
+  .menu-shade {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.65),
+      rgba(0, 0, 0, 0.35)
+    );
   }
 
   .menu-character {
-    left: 0;
-    height: 60%;
-    max-width: 75%;
-    opacity: .85;
+    left: -14%;
+    width: 90%;
+    height: 75%;
+    opacity: 0.65;
   }
 
-  .main-buttons {
-    width: min(360px, 100%);
-    padding: 15px;
-    border-radius: 8px;
-    background: rgba(13, 13, 18, .88);
+  .menu-content {
+    right: 6%;
+    width: 58%;
   }
 
-  .main-buttons h1 {
-    margin-bottom: 5px;
+  .game-logo {
+    font-size: 28px;
+    letter-spacing: 4px;
   }
 
-  .main-buttons button {
-    min-height: 40px;
-    padding: 9px;
+  .game-subtitle {
+    margin-bottom: 20px;
+    letter-spacing: 4px;
   }
 
-  .dialog-character {
-    left: 0;
-    bottom: 23%;
-    height: 63%;
-    max-width: 78%;
+  .menu-buttons {
+    gap: 7px;
+  }
+
+  .menu-buttons button {
+    min-height: 42px;
+    padding: 10px 7px;
+    font-size: 13px;
+  }
+
+  .scene-character {
+    left: -8%;
+    width: 85%;
+    height: 66%;
+    bottom: 24%;
   }
 
   .dialogue-box {
-    left: 8px;
-    right: 8px;
-    bottom: max(8px, env(safe-area-inset-bottom));
-    padding: 13px;
+    left: 3%;
+    right: 3%;
+    bottom: 72px;
+    min-height: 125px;
+    padding: 15px;
+  }
+
+  .dialogue-text {
+    font-size: 15px;
+    line-height: 1.5;
   }
 
   .dialogue-toolbar {
-    justify-content: center;
+    left: 3%;
+    right: 3%;
+    bottom: 10px;
+    gap: 5px;
   }
 
   .dialogue-toolbar button {
     flex: 1;
-    padding: 9px 5px;
+    min-width: 0;
+    padding: 11px 4px;
+    font-size: 12px;
+  }
+
+  .modal {
+    padding: 23px 16px;
   }
 
   .save-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .modal-window {
-    padding: 16px;
+  .game-menu {
+    padding: 15px;
+  }
+}
+
+@media (max-height: 500px) {
+  .menu-character {
+    height: 85%;
+  }
+
+  .menu-content {
+    width: 270px;
+  }
+
+  .game-logo {
+    font-size: 25px;
+  }
+
+  .game-subtitle {
+    margin-bottom: 12px;
+  }
+
+  .menu-buttons {
+    gap: 5px;
+  }
+
+  .menu-buttons button {
+    min-height: 32px;
+    padding: 6px;
+  }
+
+  .scene-character {
+    height: 70%;
+  }
+
+  .dialogue-box {
+    bottom: 62px;
+    min-height: 90px;
+    padding: 12px 18px;
+  }
+
+  .dialogue-text {
+    font-size: 14px;
+  }
+
+  .dialogue-toolbar {
+    bottom: 6px;
+  }
+
+  .dialogue-toolbar button {
+    padding: 7px;
   }
 }
