@@ -1,0 +1,39 @@
+{
+  "title": "Первая встреча",
+  "chapter": "ГЛАВА 01",
+  "dialogue": [
+    {
+      "speaker": "",
+      "text": "Вечер медленно растворяется в холодных огнях улицы. Ты останавливаешься, заметив впереди незнакомый силуэт.",
+      "background": "street1.jpg",
+      "character": "Stranger.Shadow",
+      "music": "street.mp3"
+    },
+    {
+      "speaker": "Алекс",
+      "text": "Я уже начал думать, что ты не придёшь.",
+      "character": "Alex.Neutral"
+    },
+    {
+      "speaker": "Незнакомец",
+      "text": "Я обещал, что буду здесь.",
+      "character": "Stranger.Shadow"
+    },
+    {
+      "speaker": "Алекс",
+      "text": "Тогда скажи мне хотя бы одно: почему именно я?",
+      "character": "Alex.Neutral",
+      "choices": [
+        { "text": "«Потому что я тебе доверяю». ", "effects": { "trust": 1 }, "next": "continue" },
+        { "text": "«Я сам хочу это узнать». ", "effects": { "trust": 0 }, "next": "continue" },
+        { "text": "Промолчать.", "effects": { "trust": -1 }, "next": "continue" }
+      ]
+    },
+    {
+      "speaker": "Незнакомец",
+      "text": "Похоже, эта история только начинается.",
+      "character": "Stranger.Shadow",
+      "end": true
+    }
+  ]
+}
