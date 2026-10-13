@@ -1,90 +1,88 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#090909">
-  <title>Soon... studio</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#09090d">
+  <title>Soon… Studio</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <section id="splash" class="screen splash">
-    <div class="splash-title">Soon... studio</div>
-  </section>
-
-  <main id="mainMenu" class="screen main-menu hidden">
-    <img class="menu-background" src="asset/8af1803dbd606d5286d6960c2fc0f57a.jpg" alt="">
-    <div class="menu-shade"></div>
-
-    <img class="menu-character"
-         src="asset/b8135a157125ead7667bd8d68b1c01de.jpg"
-         alt="Персонаж">
-
-    <div class="menu-content">
-      <div class="game-logo">SOON...</div>
-      <div class="game-subtitle">STUDIO</div>
-
-      <nav class="menu-buttons">
-        <button id="newGameBtn">Новая игра</button>
-        <button id="continueBtn" disabled>Продолжить</button>
-        <button id="loadBtn">Загрузить игру</button>
-        <button id="creditsBtn">Разработчики</button>
-        <button id="settingsBtn">Настройки</button>
-        <button id="exitBtn" class="exit-button">Выйти</button>
-      </nav>
-    </div>
-
-    <div class="version-label">DEMO VERSION</div>
-  </main>
-
-  <main id="gameScreen" class="screen game-screen hidden">
-    <img id="sceneBackground"
-         class="scene-background"
-         src="asset/a766e691dbff213e0347c0a7f3741729.jpg"
-         alt="">
-
-    <div class="scene-darkening"></div>
-
-    <img id="sceneCharacter"
-         class="scene-character"
-         src="asset/5b2b75e351246b90ebc8f47c457c58d8.jpg"
-         alt="Персонаж">
-
-    <button id="nextArea" class="next-area" aria-label="Следующая реплика"></button>
-
-    <section class="dialogue-box">
-      <div id="speakerName" class="speaker-name"></div>
-      <div id="dialogueText" class="dialogue-text"></div>
-      <div id="choices" class="choices hidden"></div>
+  <main id="app" class="app-shell">
+    <section id="splash" class="screen splash" aria-label="Загрузка">
+      <div class="splash-mark">SOON<span>…</span></div>
+      <div class="splash-caption">STUDIO</div>
+      <div class="splash-line"></div>
     </section>
 
-    <div class="dialogue-toolbar">
-      <button id="backBtn" title="Предыдущая реплика">Назад</button>
-      <button id="autoBtn" title="Автоматическое чтение">Авто</button>
-      <button id="logsBtn">Логи</button>
-      <button id="gameMenuBtn">Меню</button>
-    </div>
-  </main>
+    <section id="mainMenu" class="screen main-menu hidden">
+      <img class="menu-background" src="asset/8af1803dbd606d5286d6960c2fc0f57a.jpg" alt="">
+      <div class="menu-vignette"></div>
+      <img class="menu-character" src="asset/b8135a157125ead7667bd8d68b1c01de.jpg" alt="">
+      <div class="menu-topline"><span>AN ORIGINAL VISUAL NOVEL</span><span>DEMO · 01</span></div>
+      <div class="menu-content">
+        <div class="eyebrow">SOON STUDIO PRESENTS</div>
+        <h1>SOON<span>…</span></h1>
+        <div class="menu-subtitle">История начинается с тишины</div>
+        <div class="menu-rule"></div>
+        <nav class="menu-buttons">
+          <button id="newGameBtn" class="menu-primary"><span>Новая игра</span><span>↗</span></button>
+          <button id="continueBtn"><span>Продолжить</span><span>→</span></button>
+          <button id="loadBtn"><span>Загрузить игру</span><span>⌁</span></button>
+          <button id="logsMenuBtn"><span>История диалогов</span><span>≡</span></button>
+          <button id="settingsBtn"><span>Настройки</span><span>⚙</span></button>
+          <button id="creditsBtn"><span>Об игре</span><span>i</span></button>
+        </nav>
+      </div>
+      <div class="menu-footer"><span>SOON… STUDIO</span><span>ВЕРСИЯ 0.2</span></div>
+    </section>
 
-  <aside id="gameMenu" class="game-menu hidden">
-    <div class="game-menu-panel">
-      <div class="panel-title">МЕНЮ</div>
-      <button id="resumeBtn">Продолжить</button>
-      <button id="saveBtn">Сохранить</button>
-      <button id="gameLoadBtn">Загрузить</button>
-      <button id="gameSettingsBtn">Настройки</button>
-      <button id="mainMenuBtn">Главное меню</button>
-    </div>
-  </aside>
+    <section id="gameScreen" class="screen game-screen hidden" aria-label="Игровая сцена">
+      <img id="sceneBackground" class="scene-background" src="asset/a766e691dbff213e0347c0a7f3741729.jpg" alt="">
+      <div class="scene-color-grade"></div>
+      <img id="sceneCharacter" class="scene-character" src="asset/5b2b75e351246b90ebc8f47c457c58d8.jpg" alt="">
+      <div class="scene-top-ui"><span id="chapterLabel">ГЛАВА 01</span><span id="sceneLabel">ПЕРВАЯ ВСТРЕЧА</span></div>
+      <button id="nextArea" class="next-area" aria-label="Следующая реплика"></button>
 
-  <div id="modalLayer" class="modal-layer hidden">
-    <section class="modal">
+      <section class="dialogue-box" aria-live="polite">
+        <div class="dialogue-ornament" aria-hidden="true"><span></span><i></i><span></span></div>
+        <div class="dialogue-heading">
+          <div id="speakerName" class="speaker-name"></div>
+          <div class="dialogue-progress"><span id="lineProgress"></span></div>
+        </div>
+        <div id="dialogueText" class="dialogue-text"></div>
+        <div id="choices" class="choices hidden"></div>
+        <div class="tap-hint" id="tapHint">КОСНИТЕСЬ, ЧТОБЫ ПРОДОЛЖИТЬ <span>⌄</span></div>
+      </section>
+
+      <div class="dialogue-toolbar">
+        <button id="backBtn" aria-label="Предыдущая реплика" title="Назад">‹</button>
+        <button id="logsBtn" aria-label="Журнал диалогов" title="Журнал">≡</button>
+        <button id="autoBtn" class="auto-control" aria-label="Автоматическое чтение" title="Авто"><span class="auto-dot"></span><span>АВТО</span></button>
+        <button id="gameMenuBtn" aria-label="Игровое меню" title="Меню">☰</button>
+      </div>
+    </section>
+
+    <aside id="gameMenu" class="overlay hidden">
+      <div class="overlay-backdrop" data-close-menu></div>
+      <section class="overlay-panel">
+        <div class="overlay-kicker">SOON… STUDIO</div><h2>Пауза</h2>
+        <p class="overlay-description">История подождёт.</p>
+        <button id="resumeBtn" class="panel-action primary-action">Продолжить <span>→</span></button>
+        <button id="saveBtn" class="panel-action">Сохранить игру <span>⌁</span></button>
+        <button id="gameLoadBtn" class="panel-action">Загрузить игру <span>↗</span></button>
+        <button id="gameSettingsBtn" class="panel-action">Настройки <span>⚙</span></button>
+        <button id="mainMenuBtn" class="panel-action">Главное меню <span>⌂</span></button>
+      </section>
+    </aside>
+
+    <div id="modalLayer" class="modal-layer hidden">
       <button id="closeModalBtn" class="modal-close" aria-label="Закрыть">×</button>
-      <div id="modalContent"></div>
-    </section>
-  </div>
-
+      <section class="modal"><div id="modalContent"></div></section>
+    </div>
+    <audio id="musicPlayer" loop preload="none"></audio>
+  </main>
+  <script src="js/engine.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
